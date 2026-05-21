@@ -1,0 +1,55 @@
+/* ─── Design Tokens ─────────────────────────────────────────────────────────── */
+
+:root {
+  /* Colors */
+  --color-bg-base:        #0a0905;
+  --color-bg-surface:     #111009;
+  --color-surface-raised: #1a1812;
+  --color-surface-high:   #242018;
+
+  --color-text-primary:   #f0e8d8;
+  --color-text-secondary: #b8a98a;
+  --color-text-muted:     #6b5e48;
+
+  --color-accent:         #c9a96e;
+  --color-accent-glow:    rgba(201, 169, 110, 0.12);
+  --color-accent-dim:     rgba(201, 169, 110, 0.06);
+  --color-error:          #c0392b;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Outfit', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+  --font-ui:      'Outfit', sans-serif;
+
+  /* Spacing (4px base) */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Radius */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* Shadows */
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.4);
+  --shadow-md:  0 8px 32px rgba(0,0,0,0.5);
+  --shadow-lg:  0 24px 64px rgba(0,0,0,0.6);
+  --shadow-glow: 0 0 40px rgba(201, 169, 110, 0.15);
+
+  /* Transitions */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   450ms ease;
+}
