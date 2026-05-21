@@ -7,7 +7,7 @@ export default defineConfig({
   // base phải trùng với tên repo GitHub
   // Repo tên "portfolio" → '/portfolio/'
   // Nếu dùng username.github.io (không có sub-path) → '/'
-  base: '/portfolio/',
+  base: '/cinematic-portfolio/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
