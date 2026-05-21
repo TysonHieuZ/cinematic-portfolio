@@ -9,11 +9,21 @@ const props = defineProps({
   tags:        { type: Array, default: () => [] },
   index:       { type: Number, default: 0 },
   link:        { type: String, default: '' },
+  badge:       { type: String, default: '' },
 })
 
-// Subtle accent variation per card
-const swatchColors = ['#c9a96e', '#8b9e7a', '#7a8b9e', '#9e7a8b']
+const swatchColors = ['#c9a96e', '#8b9e7a', '#7a8b9e', '#9e7a8b', '#a08b6e', '#6e8ba0']
 const swatchColor = computed(() => swatchColors[props.index % swatchColors.length])
+
+const badgeClass = computed(() => {
+  const map = {
+    Current:    'badge--current',
+    Internship: 'badge--internship',
+    Academic:   'badge--academic',
+    Personal:   'badge--personal',
+  }
+  return map[props.badge] ?? ''
+})
 
 const emit = defineEmits({ hoverChange: (val) => typeof val === 'boolean' })
 
@@ -35,14 +45,22 @@ function handleClick() {
     <!-- Index number -->
     <span class="project-card__number">{{ String(index + 1).padStart(2, '0') }}</span>
 
-    <!-- Gradient swatch area -->
+    <!-- Gradient swatch -->
     <div class="project-card__swatch" aria-hidden="true">
-      <div class="project-card__swatch-inner" :style="{ background: `linear-gradient(135deg, ${swatchColor}, transparent)` }" />
+      <div
+        class="project-card__swatch-inner"
+        :style="{ background: `linear-gradient(135deg, ${swatchColor}, transparent)` }"
+      />
     </div>
 
     <div class="project-card__body">
       <header class="project-card__header">
-        <p class="project-card__category">{{ category }} · {{ year }}</p>
+        <div class="project-card__meta">
+          <p class="project-card__category">{{ category }} · {{ year }}</p>
+          <span v-if="badge" class="project-card__badge" :class="badgeClass">
+            {{ badge }}
+          </span>
+        </div>
         <h3 class="project-card__title">{{ title }}</h3>
       </header>
 
@@ -52,7 +70,8 @@ function handleClick() {
         <ul class="project-card__tags" aria-label="Technologies">
           <li v-for="tag in tags" :key="tag" class="project-card__tag">{{ tag }}</li>
         </ul>
-        <span class="project-card__arrow" aria-hidden="true">↗</span>
+        <span v-if="link" class="project-card__arrow" aria-hidden="true">↗</span>
+        <span v-else class="project-card__no-link" aria-hidden="true">—</span>
       </footer>
     </div>
   </article>
@@ -68,15 +87,16 @@ function handleClick() {
   background: var(--color-surface-raised);
   border: 1px solid rgba(107, 94, 72, 0.12);
   border-radius: var(--radius-sm);
-  cursor: pointer;
+  cursor: default;
   transition: border-color var(--transition-slow), box-shadow var(--transition-slow), transform var(--transition-slow);
   overflow: hidden;
 }
+.project-card--linked { cursor: pointer; }
 
 .project-card:hover {
   border-color: rgba(201, 169, 110, 0.3);
   box-shadow: var(--shadow-md), var(--shadow-glow);
-  transform: translateY(-4px);
+  transform: translateY(-3px);
 }
 
 .project-card__number {
@@ -94,18 +114,20 @@ function handleClick() {
   opacity: 0.06;
   transition: opacity var(--transition-slow);
 }
-
 .project-card:hover .project-card__swatch { opacity: 0.12; }
-
-.project-card__swatch-inner {
-  width: 100%; height: 100%;
-  /* color set dynamically via :style */
-}
+.project-card__swatch-inner { width: 100%; height: 100%; }
 
 .project-card__body {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+}
+
+.project-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
 }
 
 .project-card__category {
@@ -116,6 +138,21 @@ function handleClick() {
   color: var(--color-text-muted);
 }
 
+/* Badge */
+.project-card__badge {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.15em 0.55em;
+  border-radius: var(--radius-xs);
+  border: 1px solid;
+}
+.badge--current    { color: #4caf50; border-color: rgba(76,175,80,0.4); background: rgba(76,175,80,0.08); }
+.badge--internship { color: #c9a96e; border-color: rgba(201,169,110,0.4); background: rgba(201,169,110,0.08); }
+.badge--academic   { color: #7a8b9e; border-color: rgba(122,139,158,0.4); background: rgba(122,139,158,0.08); }
+.badge--personal   { color: #9e7a8b; border-color: rgba(158,122,139,0.4); background: rgba(158,122,139,0.08); }
+
 .project-card__title {
   font-family: var(--font-display);
   font-size: clamp(1.2rem, 2vw, 1.6rem);
@@ -124,13 +161,12 @@ function handleClick() {
   color: var(--color-text-primary);
   transition: color var(--transition-base);
 }
-
 .project-card:hover .project-card__title { color: var(--color-accent); }
 
 .project-card__desc {
-  font-size: 0.82rem;
+  font-size: 0.83rem;
   color: var(--color-text-muted);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .project-card__footer {
@@ -145,7 +181,6 @@ function handleClick() {
   flex-wrap: wrap;
   gap: var(--space-2);
 }
-
 .project-card__tag {
   font-family: var(--font-mono);
   font-size: 0.6rem;
@@ -161,15 +196,20 @@ function handleClick() {
   color: var(--color-text-muted);
   font-size: 1rem;
   transition: color var(--transition-base), transform var(--transition-base);
+  flex-shrink: 0;
 }
 .project-card:hover .project-card__arrow {
   color: var(--color-accent);
   transform: translate(2px, -2px);
+}
+.project-card__no-link {
+  color: rgba(107, 94, 72, 0.3);
+  font-size: 0.9rem;
+  flex-shrink: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .project-card { transition: none; }
   .project-card__arrow { transition: none; }
 }
-
 </style>

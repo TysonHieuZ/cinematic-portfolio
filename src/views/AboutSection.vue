@@ -53,21 +53,45 @@ onMounted(() => {
 
         <div class="about-profile__info">
           <h2 class="about-profile__name">Nguyễn Hữu Hiếu</h2>
-          <p class="about-profile__role">Intern Frontend Developer</p>
+          <p class="about-profile__role">Intern Frontend Developer · JobTest Co.</p>
           <p class="about-profile__tagline">
             "Code is just the beginning — the experience is what stays."
           </p>
           <p class="about-bio__text">
-            Fresh graduate (11/04/2026) with a passion for building clean,
-            interactive web experiences. Currently developing at
+            Fresh graduate from
+            <strong class="about-highlight">HUFLIT University</strong>
+            (10/2022 – 04/2026), GPA&nbsp;<strong class="about-highlight">2.83/4.0</strong>
+            — Bachelor's degree, ranked <em>Good</em>.
+            Currently building
             <a href="https://aihr.vn" target="_blank" rel="noopener noreferrer" class="about-link">AiHR.vn</a>
-            — an HR software platform — where I work with Vue 3, TypeScript,
-            and the Composition API daily.
+            — a comprehensive HR software platform — at
+            <strong class="about-highlight">JobTest Co.</strong>,
+            working daily with Vue&nbsp;3, TypeScript, and the Composition API.
           </p>
           <p class="about-bio__text">
-            I believe great interfaces feel less like software and more like
-            an extension of thought. Still early in the journey, but moving fast.
+            Previously interned at
+            <a href="https://winsoft.com.vn" target="_blank" rel="noopener noreferrer" class="about-link">Winsoft</a>
+            (10/2025 – 12/2025), where I built a hospital management system
+            focusing on the frontend with React.js, HTML &amp; CSS.
           </p>
+
+          <!-- Credentials -->
+          <div class="about-credentials">
+            <div class="about-credential">
+              <span class="about-credential__value">2.83<span class="about-credential__unit">/4.0</span></span>
+              <span class="about-credential__label">GPA · Good</span>
+            </div>
+            <div class="about-credential__divider" aria-hidden="true" />
+            <div class="about-credential">
+              <span class="about-credential__value">605</span>
+              <span class="about-credential__label">TOEIC Score</span>
+            </div>
+            <div class="about-credential__divider" aria-hidden="true" />
+            <div class="about-credential">
+              <span class="about-credential__value">6.5</span>
+              <span class="about-credential__label">IELTS Target '26</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -77,16 +101,65 @@ onMounted(() => {
         <ul class="about-skills__list">
           <li class="about-skills__item">Vue 3</li>
           <li class="about-skills__item">TypeScript</li>
+          <li class="about-skills__item">Composition API</li>
           <li class="about-skills__item">ReactJS</li>
           <li class="about-skills__item">C#</li>
           <li class="about-skills__item">HTML &amp; CSS</li>
           <li class="about-skills__item">Bootstrap</li>
-          <li class="about-skills__item">Composition API</li>
+          <li class="about-skills__item">Android Studio</li>
           <li class="about-skills__item">Git</li>
         </ul>
       </section>
 
-      <!-- Social + Contact -->
+      <!-- Education & Experience timeline -->
+      <section class="about-timeline animate-in" aria-label="Experience">
+        <p class="about-skills__label">Experience &amp; Education</p>
+
+        <ol class="timeline">
+          <li class="timeline__item">
+            <span class="timeline__dot" aria-hidden="true" />
+            <div class="timeline__body">
+              <p class="timeline__period">05/2026 – Present</p>
+              <h3 class="timeline__title">Intern Frontend Developer</h3>
+              <p class="timeline__place">
+                <a href="https://aihr.vn" target="_blank" rel="noopener noreferrer" class="about-link">JobTest Co. — AiHR.vn</a>
+              </p>
+              <p class="timeline__desc">
+                Developing the AiHR HR software platform. Stack: Vue 3, TypeScript, Composition API.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline__item">
+            <span class="timeline__dot" aria-hidden="true" />
+            <div class="timeline__body">
+              <p class="timeline__period">10/2025 – 12/2025</p>
+              <h3 class="timeline__title">Frontend Intern</h3>
+              <p class="timeline__place">
+                <a href="https://winsoft.com.vn" target="_blank" rel="noopener noreferrer" class="about-link">Winsoft</a>
+              </p>
+              <p class="timeline__desc">
+                Built a hospital management system focusing on the frontend layer.
+                Stack: React.js, HTML, CSS.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline__item">
+            <span class="timeline__dot timeline__dot--edu" aria-hidden="true" />
+            <div class="timeline__body">
+              <p class="timeline__period">10/2022 – 04/2026</p>
+              <h3 class="timeline__title">Bachelor of Information Technology</h3>
+              <p class="timeline__place">HUFLIT University</p>
+              <p class="timeline__desc">
+                GPA 2.83/4.0 · Ranked <em>Good</em> · TOEIC 605
+              </p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Contact -->
       <section class="about-contact animate-in" aria-label="Contact">
         <p class="about-contact__label">Get in touch</p>
         <a href="mailto:huuhieuz2310@gmail.com" class="about-contact__email">
@@ -139,15 +212,12 @@ onMounted(() => {
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(107, 94, 72, 0.1);
 }
-
 .about-nav__back {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   color: var(--color-text-muted);
-  background: none;
-  border: none;
-  cursor: pointer;
+  background: none; border: none; cursor: pointer;
   transition: color var(--transition-base);
   padding: 0;
 }
@@ -155,7 +225,7 @@ onMounted(() => {
 
 /* Main */
 .about-main {
-  max-width: 800px;
+  max-width: 820px;
   margin: 0 auto;
   padding: var(--space-20) var(--space-8) var(--space-16);
   display: flex;
@@ -175,14 +245,11 @@ onMounted(() => {
   color: var(--color-text-muted);
   margin-bottom: var(--space-4);
 }
-
 .about-hero__line {
   display: inline-block;
-  width: 2rem;
-  height: 1px;
+  width: 2rem; height: 1px;
   background: var(--color-accent);
 }
-
 .about-hero__title {
   font-family: var(--font-display);
   font-size: clamp(3rem, 7vw, 6rem);
@@ -190,19 +257,15 @@ onMounted(() => {
   line-height: 0.95;
   color: var(--color-text-primary);
 }
-.about-hero__title em {
-  font-style: italic;
-  color: var(--color-accent);
-}
+.about-hero__title em { font-style: italic; color: var(--color-accent); }
 
 /* Profile */
 .about-profile {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 200px 1fr;
   gap: var(--space-10);
   align-items: start;
 }
-
 .about-profile__avatar-wrap {
   position: relative;
   border-radius: var(--radius-sm);
@@ -210,22 +273,17 @@ onMounted(() => {
   border: 1px solid rgba(201, 169, 110, 0.15);
   aspect-ratio: 3 / 4;
 }
-
 .about-profile__avatar {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
   object-position: center top;
   display: block;
 }
-
 .about-profile__avatar-overlay {
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(10,9,5,0.4) 0%, transparent 60%);
   pointer-events: none;
 }
-
 .about-profile__corner {
   position: absolute;
   width: 14px; height: 14px;
@@ -242,7 +300,6 @@ onMounted(() => {
   flex-direction: column;
   gap: var(--space-4);
 }
-
 .about-profile__name {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 3vw, 2.4rem);
@@ -250,7 +307,6 @@ onMounted(() => {
   color: var(--color-text-primary);
   line-height: 1.1;
 }
-
 .about-profile__role {
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -258,29 +314,68 @@ onMounted(() => {
   text-transform: uppercase;
   color: var(--color-accent);
 }
-
 .about-profile__tagline {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-style: italic;
   color: var(--color-text-muted);
   border-left: 2px solid var(--color-accent);
   padding-left: var(--space-4);
 }
-
 .about-bio__text {
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   line-height: 1.75;
   color: var(--color-text-secondary);
 }
-
+.about-highlight {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
 .about-link {
   color: var(--color-accent);
   border-bottom: 1px solid rgba(201,169,110,0.3);
   transition: border-color var(--transition-base);
+  text-decoration: none;
 }
 .about-link:hover { border-color: var(--color-accent); }
+
+/* Credentials row */
+.about-credentials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(107, 94, 72, 0.12);
+  flex-wrap: wrap;
+}
+.about-credential {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.about-credential__value {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+.about-credential__unit {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+.about-credential__label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.about-credential__divider {
+  width: 1px; height: 28px;
+  background: rgba(107, 94, 72, 0.2);
+}
 
 /* Skills */
 .about-skills__label {
@@ -291,13 +386,11 @@ onMounted(() => {
   color: var(--color-text-muted);
   margin-bottom: var(--space-4);
 }
-
 .about-skills__list {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
 }
-
 .about-skills__item {
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -313,6 +406,77 @@ onMounted(() => {
   color: var(--color-accent);
 }
 
+/* Timeline */
+.about-timeline { display: flex; flex-direction: column; }
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: var(--space-6);
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--color-accent), rgba(107,94,72,0.15));
+}
+
+.timeline__item {
+  position: relative;
+  padding-bottom: var(--space-8);
+  padding-left: var(--space-5);
+}
+.timeline__item:last-child { padding-bottom: 0; }
+
+.timeline__dot {
+  position: absolute;
+  left: -1px;
+  top: 6px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 2px solid var(--color-bg-base);
+  box-shadow: 0 0 8px rgba(201,169,110,0.4);
+  transform: translateX(-50%);
+}
+.timeline__dot--edu {
+  background: var(--color-bg-base);
+  border-color: var(--color-accent);
+}
+
+.timeline__period {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-1);
+}
+.timeline__title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+.timeline__place {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+.timeline__desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
 /* Contact */
 .about-contact {
   border-top: 1px solid rgba(107, 94, 72, 0.15);
@@ -321,7 +485,6 @@ onMounted(() => {
   flex-direction: column;
   gap: var(--space-5);
 }
-
 .about-contact__label {
   font-family: var(--font-mono);
   font-size: 0.65rem;
@@ -329,29 +492,28 @@ onMounted(() => {
   text-transform: uppercase;
   color: var(--color-text-muted);
 }
-
 .about-contact__email {
   font-family: var(--font-display);
-  font-size: clamp(1.2rem, 2.5vw, 1.9rem);
+  font-size: clamp(1.1rem, 2.5vw, 1.8rem);
   font-weight: 300;
   color: var(--color-text-primary);
   transition: color var(--transition-base);
+  text-decoration: none;
 }
 .about-contact__email:hover { color: var(--color-accent); }
 
 /* Social */
 .about-social {
   display: flex;
-  gap: var(--space-4);
+  gap: var(--space-3);
   flex-wrap: wrap;
 }
-
 .about-social__link {
   display: flex;
   align-items: center;
   gap: var(--space-2);
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-text-muted);
@@ -365,11 +527,7 @@ onMounted(() => {
   color: var(--color-accent);
   border-color: var(--color-accent);
 }
-
-.about-social__icon {
-  width: 0.9rem;
-  height: 0.9rem;
-}
+.about-social__icon { width: 0.9rem; height: 0.9rem; }
 
 /* Responsive */
 @media (max-width: 640px) {
@@ -378,13 +536,8 @@ onMounted(() => {
     gap: var(--space-10);
   }
   .about-nav { padding: var(--space-4) var(--space-5); }
-  .about-profile {
-    grid-template-columns: 1fr;
-  }
-  .about-profile__avatar-wrap {
-    max-width: 200px;
-    aspect-ratio: 1 / 1;
-  }
+  .about-profile { grid-template-columns: 1fr; }
+  .about-profile__avatar-wrap { max-width: 180px; aspect-ratio: 1 / 1; }
 }
 
 /* Reduced motion */
