@@ -2,6 +2,7 @@
 defineProps({
   accentColor: { type: String, default: '#c9a96e' },
   roleLabel:   { type: String, default: 'Portfolio headline' },
+  isVi:        { type: Boolean, default: false },
 })
 </script>
 
@@ -9,16 +10,13 @@ defineProps({
   <header class="hero-headline" :aria-label="roleLabel">
     <p class="hero-headline__eyebrow">
       <span class="hero-headline__line" aria-hidden="true" />
-      Frontend Developer · 2026
+      {{ isVi ? 'Lập trình viên Frontend · 2026' : 'Frontend Developer · 2026' }}
     </p>
-
     <h1 class="hero-headline__title">
       <span class="hero-headline__title-row">Nguyễn</span>
-      <span class="hero-headline__title-row hero-headline__title-row--accent">
-        Hữu Hiếu
-      </span>
+      <span class="hero-headline__title-row hero-headline__title-row--accent">Hữu Hiếu</span>
       <span class="hero-headline__title-row hero-headline__title-row--sm">
-        — Intern Frontend Developer
+        — {{ isVi ? 'Intern Lập trình viên Frontend' : 'Intern Frontend Developer' }}
       </span>
     </h1>
   </header>
