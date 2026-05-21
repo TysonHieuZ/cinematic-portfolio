@@ -4,41 +4,21 @@ import { useRouter } from 'vue-router'
 
 import { useCinematicScroll } from '@/composables/useCinematicScroll'
 import ProjectCard from '@/components/projects/ProjectCard.vue'
-import BaseButton  from '@/components/ui/BaseButton.vue'
 
 const router = useRouter()
-const { animateFadeUpBatch, animateProjectCardReveal } = useCinematicScroll()
+const { animateProjectCardReveal } = useCinematicScroll()
 
 const cardRefs = ref([])
 
 const projects = [
   {
-    title: 'Noir Collective',
-    category: 'Brand Identity',
-    year: '2026',
-    description: 'A cinematic brand system built around shadow, contrast, and monochrome depth.',
-    tags: ['Vue 3', 'GSAP', 'Figma'],
-  },
-  {
-    title: 'Obsidian Dashboard',
+    title: 'AiHR — Phần mềm Nhân sự',
     category: 'Web Application',
-    year: '2025',
-    description: 'Real-time analytics interface with dark-glass aesthetic and fluid data visualisations.',
-    tags: ['Pinia', 'D3.js', 'Tailwind'],
-  },
-  {
-    title: 'Lumière Studio',
-    category: 'Photography Portfolio',
-    year: '2025',
-    description: 'Editorial-grade portfolio with film-grain textures and magazine-style layout.',
-    tags: ['Vue 3', 'GSAP ScrollTrigger', 'CSS Grid'],
-  },
-  {
-    title: 'Signal & Noise',
-    category: 'Music Platform',
-    year: '2024',
-    description: 'Ambient music player with waveform visualisation and spatial audio controls.',
-    tags: ['Web Audio API', 'Canvas', 'Vue 3'],
+    year: '2026',
+    description:
+      'Hệ thống quản lý nhân sự toàn diện cho doanh nghiệp Việt Nam. Tham gia phát triển giao diện người dùng với Vue 3, TypeScript và Composition API tại công ty AiHR.',
+    tags: ['Vue 3', 'TypeScript', 'Composition API'],
+    link: 'https://aihr.vn',
   },
 ]
 
@@ -67,9 +47,12 @@ onMounted(() => {
       <header class="projects-header">
         <p class="projects-header__eyebrow">
           <span class="projects-header__line" aria-hidden="true" />
-          Portfolio · {{ projects.length }} Projects
+          Portfolio · {{ projects.length }} Project
         </p>
         <h1 class="projects-header__title">Selected<br /><em>Work</em></h1>
+        <p class="projects-header__note">
+          Just getting started — more projects on the way.
+        </p>
       </header>
 
       <ul class="projects-grid" aria-label="Project list">
@@ -84,10 +67,18 @@ onMounted(() => {
             :year="project.year"
             :description="project.description"
             :tags="project.tags"
+            :link="project.link"
             :index="index"
           />
         </li>
       </ul>
+
+      <!-- Coming soon placeholder -->
+      <div class="projects-coming">
+        <span class="projects-coming__line" aria-hidden="true" />
+        <p class="projects-coming__text">More coming soon</p>
+        <span class="projects-coming__line" aria-hidden="true" />
+      </div>
     </main>
   </div>
 </template>
@@ -166,16 +157,48 @@ onMounted(() => {
   font-weight: 300;
   line-height: 0.95;
   color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
 }
 .projects-header__title em {
   font-style: italic;
   color: var(--color-accent);
 }
 
+.projects-header__note {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
 .projects-grid {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+}
+
+/* Coming soon */
+.projects-coming {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  margin-top: var(--space-12);
+  opacity: 0.4;
+}
+
+.projects-coming__line {
+  flex: 1;
+  height: 1px;
+  background: rgba(107, 94, 72, 0.3);
+}
+
+.projects-coming__text {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  white-space: nowrap;
 }
 
 @media (max-width: 640px) {

@@ -8,6 +8,7 @@ const props = defineProps({
   description: { type: String, default: '' },
   tags:        { type: Array, default: () => [] },
   index:       { type: Number, default: 0 },
+  link:        { type: String, default: '' },
 })
 
 // Subtle accent variation per card
@@ -18,13 +19,18 @@ const emit = defineEmits({ hoverChange: (val) => typeof val === 'boolean' })
 
 function handleMouseEnter() { emit('hoverChange', true) }
 function handleMouseLeave() { emit('hoverChange', false) }
+function handleClick() {
+  if (props.link) window.open(props.link, '_blank', 'noopener,noreferrer')
+}
 </script>
 
 <template>
   <article
     class="project-card"
+    :class="{ 'project-card--linked': link }"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
+    @click="handleClick"
   >
     <!-- Index number -->
     <span class="project-card__number">{{ String(index + 1).padStart(2, '0') }}</span>
@@ -165,4 +171,5 @@ function handleMouseLeave() { emit('hoverChange', false) }
   .project-card { transition: none; }
   .project-card__arrow { transition: none; }
 }
+
 </style>

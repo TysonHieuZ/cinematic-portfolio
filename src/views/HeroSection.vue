@@ -5,15 +5,12 @@ import { storeToRefs } from 'pinia'
 
 import { useCinematicScroll } from '@/composables/useCinematicScroll'
 import { useTimeTracker }      from '@/composables/useTimeTracker'
-import { useAudioController }  from '@/composables/useAudioController'
 import { useAppStore }         from '@/stores/appStore'
 
-import HeroHeadline      from '@/components/hero/HeroHeadline.vue'
-import HeroReelFrame     from '@/components/hero/HeroReelFrame.vue'
-import HeroScrollCue     from '@/components/hero/HeroScrollCue.vue'
-import FooterClock       from '@/components/footer/FooterClock.vue'
-import AudioToggleButton from '@/components/ui/AudioToggleButton.vue'
-import BaseButton        from '@/components/ui/BaseButton.vue'
+import HeroHeadline  from '@/components/hero/HeroHeadline.vue'
+import HeroScrollCue from '@/components/hero/HeroScrollCue.vue'
+import FooterClock   from '@/components/footer/FooterClock.vue'
+import BaseButton    from '@/components/ui/BaseButton.vue'
 
 // ─── Store ────────────────────────────────────────────────────────────────────
 const appStore = useAppStore()
@@ -31,25 +28,14 @@ const {
 
 const { formattedTime, formattedDate, timeZoneLabel, isTicking } = useTimeTracker()
 
-const {
-  isPlaying, isMuted, audioLabel,
-  togglePlayback, toggleMute,
-} = useAudioController({ src: '/audio/ambient.mp3', volume: 0.3 })
-
 // ─── Template refs ────────────────────────────────────────────────────────────
 const headlineRef   = ref(null)
 const subCopyRef    = ref(null)
 const ctaRef        = ref(null)
-const reelRef       = ref(null)
+const avatarRef     = ref(null)
 const parallaxBgRef = ref(null)
 
-// ─── Local state ──────────────────────────────────────────────────────────────
-const isReelOverlayOpen = ref(false)
-
 // ─── Handlers ─────────────────────────────────────────────────────────────────
-function handleOpenReelOverlay()  { isReelOverlayOpen.value = true  }
-function handleCloseReelOverlay() { isReelOverlayOpen.value = false }
-
 function handleNavigateToProjects() {
   if (isReducedMotion.value) { router.push('/projects'); return }
   triggerPageLeaveTransition(() => router.push('/projects'))
@@ -60,10 +46,6 @@ function handleNavigateToAbout() {
   triggerPageLeaveTransition(() => router.push('/about'))
 }
 
-function handleReelHoverChange(isHovering) {
-  appStore.setCustomCursorActive(isHovering)
-}
-
 // ─── Lifecycle ────────────────────────────────────────────────────────────────
 onMounted(() => {
   if (isReducedMotion.value) return
@@ -72,7 +54,7 @@ onMounted(() => {
     headline: headlineRef.value,
     subCopy:  subCopyRef.value,
     cta:      ctaRef.value,
-    reel:     reelRef.value,
+    reel:     avatarRef.value,
   })
 
   if (parallaxBgRef.value) {
@@ -86,7 +68,7 @@ onMounted(() => {
 
     <!-- ── Nav bar ─────────────────────────────────────────────────── -->
     <nav class="hero-nav" aria-label="Primary navigation">
-      <span class="hero-nav__logo">Portfolio.</span>
+      <span class="hero-nav__logo">HiếuZ.</span>
       <ul class="hero-nav__links">
         <li>
           <button class="hero-nav__link" type="button" @click="handleNavigateToProjects">
@@ -97,6 +79,14 @@ onMounted(() => {
           <button class="hero-nav__link" type="button" @click="handleNavigateToAbout">
             About
           </button>
+        </li>
+        <li>
+          <a
+            class="hero-nav__link"
+            href="https://github.com/TysonHieuZ"
+            target="_blank"
+            rel="noopener noreferrer"
+          >GitHub</a>
         </li>
       </ul>
     </nav>
@@ -126,49 +116,57 @@ onMounted(() => {
           </div>
 
           <p ref="subCopyRef" class="hero-section__sub-copy">
-            Directing visual narratives at the intersection
-            of code&nbsp;&amp;&nbsp;craft.
-            Available for select collaborations in&nbsp;2026.
+            Code is just the beginning — the experience is what stays.
+            Fresh graduate turning ideas into clean, interactive web products.
+            Currently building at&nbsp;<a href="https://aihr.vn" target="_blank" rel="noopener noreferrer" class="hero-section__inline-link">AiHR.vn</a>.
           </p>
 
           <div ref="ctaRef" class="hero-section__cta-group">
             <BaseButton variant="primary" size="lg" @click="handleNavigateToProjects">
               Selected Work
             </BaseButton>
-            <BaseButton variant="ghost" size="lg" @click="handleOpenReelOverlay">
-              Watch Reel ↗
+            <BaseButton variant="ghost" size="lg" @click="handleNavigateToAbout">
+              About Me ↗
             </BaseButton>
           </div>
 
           <!-- Stats row -->
           <div class="hero-section__stats">
             <div class="hero-section__stat">
-              <span class="hero-section__stat-value">12+</span>
-              <span class="hero-section__stat-label">Projects</span>
+              <span class="hero-section__stat-value">1+</span>
+              <span class="hero-section__stat-label">Project</span>
             </div>
             <div class="hero-section__stat-divider" aria-hidden="true" />
             <div class="hero-section__stat">
-              <span class="hero-section__stat-value">6yr</span>
-              <span class="hero-section__stat-label">Experience</span>
+              <span class="hero-section__stat-value">Fresh</span>
+              <span class="hero-section__stat-label">Graduate</span>
             </div>
             <div class="hero-section__stat-divider" aria-hidden="true" />
             <div class="hero-section__stat">
               <span class="hero-section__stat-value">∞</span>
-              <span class="hero-section__stat-label">Coffee</span>
+              <span class="hero-section__stat-label">Ambition</span>
             </div>
           </div>
         </div>
 
-        <!-- Right: reel frame -->
-        <div ref="reelRef" class="hero-section__reel-wrap">
-          <HeroReelFrame
-            :is-overlay-open="isReelOverlayOpen"
-            thumbnail-src=""
-            thumbnail-alt="Showreel preview"
-            @open-overlay="handleOpenReelOverlay"
-            @close-overlay="handleCloseReelOverlay"
-            @hover-change="handleReelHoverChange"
-          />
+        <!-- Right: avatar -->
+        <div ref="avatarRef" class="hero-section__avatar-wrap">
+          <div class="hero-section__avatar-frame">
+            <!-- Corner decorations -->
+            <span class="hero-section__corner hero-section__corner--tl" aria-hidden="true" />
+            <span class="hero-section__corner hero-section__corner--br" aria-hidden="true" />
+            <img
+              src="/avatar.jpg"
+              alt="Nguyễn Hữu Hiếu"
+              class="hero-section__avatar-img"
+              loading="eager"
+            />
+            <div class="hero-section__avatar-overlay" aria-hidden="true" />
+          </div>
+          <p class="hero-section__avatar-label" aria-hidden="true">
+            <span class="hero-section__avatar-dot" />
+            Available for opportunities
+          </p>
         </div>
 
       </div>
@@ -176,20 +174,6 @@ onMounted(() => {
       <!-- Scroll cue -->
       <div class="hero-section__scroll-cue">
         <HeroScrollCue />
-      </div>
-
-      <!-- Audio toggle -->
-      <div class="hero-section__audio">
-        <AudioToggleButton
-          :is-playing="isPlaying"
-          :is-muted="isMuted"
-          :aria-label="audioLabel"
-          @toggle-playback="togglePlayback"
-          @toggle-mute="toggleMute"
-        />
-        <span class="hero-section__audio-label" aria-hidden="true">
-          {{ isPlaying ? 'ambient on' : 'ambient off' }}
-        </span>
       </div>
 
     </section>
@@ -238,6 +222,7 @@ onMounted(() => {
 .hero-nav__links {
   display: flex;
   gap: var(--space-8);
+  align-items: center;
 }
 
 .hero-nav__link {
@@ -251,6 +236,7 @@ onMounted(() => {
   cursor: pointer;
   transition: color var(--transition-base);
   padding: 0;
+  text-decoration: none;
 }
 .hero-nav__link:hover { color: var(--color-accent); }
 
@@ -339,7 +325,6 @@ onMounted(() => {
 }
 
 .hero-section__headline-wrap {
-  /* GSAP animates the outer wrapper — keeps headline component clean */
   overflow: hidden;
 }
 
@@ -349,14 +334,22 @@ onMounted(() => {
   line-height: 1.7;
   color: var(--color-text-secondary);
   max-width: 42ch;
-  opacity: 0; /* Revealed by GSAP */
+  opacity: 0;
 }
+
+.hero-section__inline-link {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,169,110,0.3);
+  transition: border-color var(--transition-base);
+}
+.hero-section__inline-link:hover { border-color: var(--color-accent); }
 
 .hero-section__cta-group {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-4);
-  opacity: 0; /* Revealed by GSAP */
+  opacity: 0;
 }
 
 /* Stats */
@@ -396,9 +389,82 @@ onMounted(() => {
   background: rgba(107, 94, 72, 0.2);
 }
 
-/* Reel frame */
-.hero-section__reel-wrap {
-  opacity: 0; /* Revealed by GSAP */
+/* ── Avatar ── */
+.hero-section__avatar-wrap {
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.hero-section__avatar-frame {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-surface-raised);
+}
+
+.hero-section__avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.hero-section__avatar-frame:hover .hero-section__avatar-img {
+  transform: scale(1.04);
+}
+
+/* Cinematic gradient overlay on photo */
+.hero-section__avatar-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(10,9,5,0.5) 0%, transparent 50%),
+    linear-gradient(to bottom, rgba(10,9,5,0.15) 0%, transparent 30%);
+  pointer-events: none;
+}
+
+/* Corner brackets */
+.hero-section__corner {
+  position: absolute;
+  width: 20px; height: 20px;
+  border-color: var(--color-accent);
+  border-style: solid;
+  opacity: 0.7;
+  z-index: 2;
+}
+.hero-section__corner--tl { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
+.hero-section__corner--br { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+
+.hero-section__avatar-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.hero-section__avatar-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #4caf50;
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.6);
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
 }
 
 /* Scroll cue */
@@ -410,25 +476,6 @@ onMounted(() => {
   z-index: 5;
 }
 
-/* Audio */
-.hero-section__audio {
-  position: fixed;
-  bottom: var(--space-6);
-  right: var(--space-8);
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.hero-section__audio-label {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .hero-section__grid {
@@ -438,20 +485,26 @@ onMounted(() => {
     gap: var(--space-10);
   }
 
+  .hero-section__avatar-wrap {
+    order: -1;
+  }
+
+  .hero-section__avatar-frame {
+    max-width: 280px;
+    aspect-ratio: 1 / 1;
+  }
+
   .hero-section__index-line { display: none; }
-
   .hero-section__cta-group { flex-direction: column; align-items: flex-start; }
-
-  .hero-nav { padding: var(--space-5) var(--space-5); }
+  .hero-nav { padding: var(--space-5); }
 }
 
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .hero-section__sub-copy,
   .hero-section__cta-group,
-  .hero-section__reel-wrap {
-    opacity: 1;
-  }
+  .hero-section__avatar-wrap { opacity: 1; }
   .hero-section__bg { will-change: auto; }
+  .hero-section__avatar-dot { animation: none; }
 }
 </style>

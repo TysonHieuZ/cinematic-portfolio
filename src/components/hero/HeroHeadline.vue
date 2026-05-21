@@ -9,15 +9,17 @@ defineProps({
   <header class="hero-headline" :aria-label="roleLabel">
     <p class="hero-headline__eyebrow">
       <span class="hero-headline__line" aria-hidden="true" />
-      Selected Work · 2024–2026
+      Frontend Developer · 2026
     </p>
 
     <h1 class="hero-headline__title">
-      <span class="hero-headline__title-row">Crafting</span>
+      <span class="hero-headline__title-row">Nguyễn</span>
       <span class="hero-headline__title-row hero-headline__title-row--accent">
-        Cinematic
+        Hữu Hiếu
       </span>
-      <span class="hero-headline__title-row">Experiences</span>
+      <span class="hero-headline__title-row hero-headline__title-row--sm">
+        — Intern Frontend Developer
+      </span>
     </h1>
   </header>
 </template>
@@ -62,12 +64,19 @@ defineProps({
 
 .hero-headline__title-row {
   display: block;
-  /* Each row clips for the GSAP yPercent entrance */
   overflow: hidden;
 }
 
 .hero-headline__title-row--accent {
   font-style: italic;
   color: var(--color-accent);
+}
+
+.hero-headline__title-row--sm {
+  font-size: clamp(1rem, 2.2vw, 1.8rem);
+  font-style: normal;
+  color: var(--color-text-muted);
+  margin-top: var(--space-3);
+  letter-spacing: 0.01em;
 }
 </style>
