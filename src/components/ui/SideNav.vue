@@ -8,14 +8,15 @@ const router = useRouter()
 const store  = useAppStore()
 
 const t = computed(() => store.isVi
-  ? { home: 'Trang chủ', work: 'Dự án', about: 'Về tôi' }
-  : { home: 'Home',      work: 'Work',   about: 'About' },
+  ? { home: 'Trang chủ', work: 'Dự án', about: 'Về tôi', contact: 'Liên hệ' }
+  : { home: 'Home',      work: 'Work',   about: 'About',  contact: 'Contact' },
 )
 
 const links = computed(() => [
-  { path: '/',         label: t.value.home, icon: 'home'  },
-  { path: '/projects', label: t.value.work, icon: 'work'  },
-  { path: '/about',    label: t.value.about, icon: 'about' },
+  { path: '/',         label: t.value.home,    icon: 'home'    },
+  { path: '/projects', label: t.value.work,    icon: 'work'    },
+  { path: '/about',    label: t.value.about,   icon: 'about'   },
+  { path: '/contact',  label: t.value.contact, icon: 'contact' },
 ])
 
 function navigate(path) { router.push(path) }
@@ -56,11 +57,14 @@ function isActive(path) {
               <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
             </svg>
             <!-- About -->
-            <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <svg v-else-if="link.icon === 'about'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <circle cx="12" cy="8" r="4"/>
               <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
             </svg>
-          </span>
+            <!-- Contact -->
+            <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>          </span>
 
           <!-- Tooltip label -->
           <span class="side-nav__tooltip">{{ link.label }}</span>

@@ -5,12 +5,11 @@ const routes = [
   { path: '/',         name: 'home',     component: HeroSection },
   { path: '/projects', name: 'projects', component: () => import('@/views/ProjectsSection.vue') },
   { path: '/about',    name: 'about',    component: () => import('@/views/AboutSection.vue') },
-  // Catch-all redirect (quan trọng cho GitHub Pages)
+  { path: '/contact',  name: 'contact',  component: () => import('@/views/ContactSection.vue') },
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 
 const router = createRouter({
-  // import.meta.env.BASE_URL tự lấy từ vite.config base
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
